@@ -50,14 +50,60 @@
 			  <div class="modal-body" id="exampleModalBody">
 				
 				<div class="form-group">
-					<label for="chaine">chaîne</label>
+					<label for="chaineInput">chaîne</label>
 					<input type="text" id="chaineInput">
 				</div>
 					
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" href="#exampleModal" id="saveButton">Ajouter</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" href="#exampleModal" id="addButton">Ajouter</button>
+			  </div>
+		</template>
+		
+		<template id="seeBlockModalTemplate">
+			<div class="modal-header">
+				<h5 class="modal-title">Details Bloc</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body" id="exampleModalBody">
+					<div><span>Chaïne : </span><span id="chaine"></span></div>
+					<div><span>Hash : </span><span id="hash"></span></div>
+					<div><span>Hash parent : </span><span id="hashParent"></span></div>
+					<div><span>Valide : </span><span id="valide"></span></div>
+					<div><span>Invalide : </span><span id="invalide"></span></div>
+					<div id="transactions"></div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+			  </div>
+		</template>
+		
+		<template id="addTransModalTemplate">
+			<div class="modal-header">
+				<h5 class="modal-title">Ajout Transaction</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body" id="exampleModalBody">
+					<div class="form-group">
+						<label for="emetteurInput">ID Emetteur</label>
+						<input type="text" id="emetteurInput">
+					</div>
+					<div class="form-group">
+						<label for="recepteurInput">ID Recepteur</label>
+						<input type="text" id="recepteurInput">
+					</div><div class="form-group">
+						<label for="montantInput">Montant</label>
+						<input type="number" id="montantInput">
+					</div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" href="#exampleModal" id="addButton">Ajouter</button>
 			  </div>
 		</template>
 		
