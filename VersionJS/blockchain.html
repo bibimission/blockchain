@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BlockChain</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="blockchain.css">
+		<link rel="stylesheet" href="bootstrap.min.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<div id="editorBody" class="container-fluid">
+				<div class="row">
+					<div class="col-10 row" id="blockchainRow">
+					</div>
+					<div class="col-2" id="controlPanel">
+						<button id="addButton" type="button" data-toggle="modal" data-target="#exampleModal">Ajouter Bloc</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal hide fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content" id="modalContent">
+				
+			</div>
+		  </div>
+		</div>
+		
+		
+		
+		<!-- Template de bloc -->
+		<template id="blockCellTemplate">
+			<div class="col-1">
+				<span id="blockName"></span>
+				<button id="detailsButton" type="button" data-toggle="modal" data-target="#exampleModal">Voir</button>
+				<button id="transacButton" type="button" data-toggle="modal" data-target="#exampleModal">Ajouter une transaction</button>
+			</div>
+		</template>
+		
+		<!-- Template de modale -->
+		<template id="addBlockModalTemplate">
+			<div class="modal-header">
+				<h5 class="modal-title">Ajouter Bloc</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body" id="exampleModalBody">
+				
+				<div class="form-group">
+					<label for="chaine">chaîne</label>
+					<input type="text" id="chaineInput">
+				</div>
+					
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" href="#exampleModal" id="saveButton">Ajouter</button>
+			  </div>
+		</template>
+		
+		
+		<script src= "blockchain.js"></script>
+		<script src="jquery.min.js"></script>
+		<script src="bootstrap.min.js"></script>
+	</body>
+</html>

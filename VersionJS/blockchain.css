@@ -1,0 +1,26 @@
+.col-1{
+	display:inline-block;
+	background-color: #dbd763;
+}
+.container{
+	width:100%;
+	margin: unset;
+}
+.wrapper{
+	width:100%;
+}
+.row{
+	padding-top : 5px;
+	background-color: #9cf0c0;
+	border : 1px solid black;
+}
+.hide{
+	display:none;
+}
+.modal-dialog{
+	overflow-y: initial !important
+}
+.modal-body{
+	height: 50%;
+	overflow-y: auto;
+}
