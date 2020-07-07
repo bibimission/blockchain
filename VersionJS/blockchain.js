@@ -25,10 +25,17 @@ document.getElementById("addButton").onclick = function(){
 	var addBlockModalTemplateClone = document.importNode(addBlockModalTemplate.content,true);
 	
 	var addButton = addBlockModalTemplateClone.getElementById("addButton");
-	addButton.onclick=function(){
-		var newBloc = new Block(document.getElementById("exampleModalBody").querySelector("#chaineInput").value);
-		blockchain.blocks.push(newBloc);
-		blockchain.display();
+	addButton.onclick=function(e){
+		var newName = document.getElementById("exampleModalBody").querySelector("#chaineInput").value;
+		if(blockchain.blocks.find(b=>b.chaine == newName)){
+			e.preventDefault();
+			e.stopPropagation();
+			document.getElementById("exampleModalBody").querySelector("#chaineFeedback").style.display="block";
+		}else{
+			var newBloc = new Block(newName);
+			blockchain.blocks.push(newBloc);
+			blockchain.display();
+		}
 	};
 	
 	modalContent.appendChild(addBlockModalTemplateClone);
@@ -58,6 +65,13 @@ var showAddTransaction = function(){
 	
 }
 
+var validate = function(entity){
+	entity.valideCount++;
+};
+var invalidate = function(entity){
+	entity.nonValideCount++;
+};
+
 function BlockChain(){
 	this.blocks = [];
 	this.display = function(){
@@ -71,6 +85,9 @@ function BlockChain(){
 			blockCellTemplateClone.getElementById("detailsButton").onclick = function(){bloc.display();};
 			blockCellTemplateClone.getElementById("transacButton").setAttribute("hash",bloc.hash);
 			blockCellTemplateClone.getElementById("transacButton").onclick = showAddTransaction;
+			
+			blockCellTemplateClone.getElementById("validButt").onclick = function(){validate(bloc)};
+			blockCellTemplateClone.getElementById("invalidButt").onclick = function(){invalidate(bloc)};
 			
 			row.appendChild(blockCellTemplateClone);
 		});
@@ -116,10 +133,21 @@ function Block(chaine){
 		seeBlockModalTemplateClone.getElementById("invalide").innerHTML = this.nonValideCount;
 		
 		var transactionsDiv = seeBlockModalTemplateClone.getElementById("transactions");
+		
+		var transactionTemplate = document.getElementById("transactionTemplate");
 		this.transactions.forEach(function(transaction){
-			var transDiv = document.createElement("div");
-			transDiv.innerHTML = transaction;
-			transactionsDiv.appendChild(transDiv);
+			var transactionTemplateClone = document.importNode(transactionTemplate.content,true);
+			
+			transactionTemplateClone.getElementById("emetteur").innerHTML = transaction.id_emetteur;
+			transactionTemplateClone.getElementById("recepteur").innerHTML = transaction.id_recepteur;
+			transactionTemplateClone.getElementById("montant").innerHTML = transaction.montant;
+			transactionTemplateClone.getElementById("valide").innerHTML = transaction.valideCount;
+			transactionTemplateClone.getElementById("invalide").innerHTML = transaction.nonValideCount;
+			
+			transactionTemplateClone.getElementById("validButt").onclick = function(){validate(transaction)};
+			transactionTemplateClone.getElementById("invalidButt").onclick = function(){invalidate(transaction)};
+			
+			transactionsDiv.appendChild(transactionTemplateClone);
 		});
 		
 		modalContent.appendChild(seeBlockModalTemplateClone);
@@ -145,8 +173,5 @@ function Transaction(){
 	};
 	this.isValid = function(){
 		return this.valideCount > this.nonValideCount;
-	};
-	this.toString = function(){
-		return this.id_emeteur + " à " + this.id_recepteur + " montant: " + this.montant;
 	};
 }

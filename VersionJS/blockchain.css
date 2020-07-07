@@ -1,4 +1,4 @@
-.col-1{
+.blockCell{
 	display:inline-block;
 	background-color: #dbd763;
 }
@@ -9,9 +9,9 @@
 .wrapper{
 	width:100%;
 }
-.row{
+.blockRow{
 	padding-top : 5px;
-	background-color: #9cf0c0;
+	background-color: #34cdeb;
 	border : 1px solid black;
 }
 .hide{
@@ -23,4 +23,10 @@
 .modal-body{
 	height: 50%;
 	overflow-y: auto;
+}
+.valide{
+	background-color : #77eb34;
+}
+.invalide{
+	background-color : #eb4034;
 }

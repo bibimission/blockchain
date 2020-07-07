@@ -9,7 +9,7 @@
 	<body>
 		<div class="wrapper">
 			<div id="editorBody" class="container-fluid">
-				<div class="row">
+				<div class="row blockRow">
 					<div class="col-10 row" id="blockchainRow">
 					</div>
 					<div class="col-2" id="controlPanel">
@@ -32,10 +32,24 @@
 		
 		<!-- Template de bloc -->
 		<template id="blockCellTemplate">
-			<div class="col-1">
-				<span id="blockName"></span>
-				<button id="detailsButton" type="button" data-toggle="modal" data-target="#exampleModal">Voir</button>
-				<button id="transacButton" type="button" data-toggle="modal" data-target="#exampleModal">Ajouter une transaction</button>
+			<div class="col-2 blockCell">
+				<div class="row">
+					<div class="col-8">
+						<center><span id="blockName"></span></center>
+					</div>
+					<div class="col-4">
+						<button id="detailsButton" class="btn btn-info btn-block" type="button" data-toggle="modal" data-target="#exampleModal">Voir</button>
+					</div>
+				</div>
+				<button id="transacButton" class="btn btn-secondary btn-block" type="button" data-toggle="modal" data-target="#exampleModal">Ajouter une transaction</button>
+				<div class="row">
+					<div class="col-6">
+						<button id="validButt" class="btn btn-success btn-block">Valider</button>
+					</div>
+					<div class="col-6">
+						<button id="invalidButt" class="btn btn-danger btn-block">Invalider</button>
+					</div>
+				</div>
 			</div>
 		</template>
 		
@@ -52,6 +66,9 @@
 				<div class="form-group">
 					<label for="chaineInput">chaîne</label>
 					<input type="text" id="chaineInput">
+					<div class="invalid-feedback" id="chaineFeedback">
+						Nom déja utilisé
+					</div>
 				</div>
 					
 			  </div>
@@ -69,12 +86,14 @@
 				</button>
 			  </div>
 			  <div class="modal-body" id="exampleModalBody">
-					<div><span>Chaïne : </span><span id="chaine"></span></div>
+					<div><span>Chaîne : </span><span id="chaine"></span></div>
 					<div><span>Hash : </span><span id="hash"></span></div>
 					<div><span>Hash parent : </span><span id="hashParent"></span></div>
 					<div><span>Valide : </span><span id="valide"></span></div>
 					<div><span>Invalide : </span><span id="invalide"></span></div>
-					<div id="transactions"></div>
+					<hr>
+					<h4>Transactions :</h4>
+					<div id="transactions" class="row"></div>
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
@@ -105,6 +124,28 @@
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
 				<button type="button" class="btn btn-primary" data-dismiss="modal" href="#exampleModal" id="addButton">Ajouter</button>
 			  </div>
+		</template>
+		
+		<template id="transactionTemplate">
+			<div class="col-12">
+				<hr>
+				
+			</div>
+			<div class="col-6" id="desc">
+				<div><span>Emetteur : </span><span id="emetteur"></span></div>
+				<div><span>Recepteur : </span><span id="recepteur"></span></div>
+				<div><span>Montant : </span><span id="montant"></span></div>
+				<div><span>Valide : </span><span id="valide"></span></div>
+				<div><span>Invalide : </span><span id="invalide"></span></div>
+			</div>
+			<div class="col-6 row">
+				<div class="col-6">
+					<button id="validButt" class="btn btn-success btn-block">Valider</button>
+				</div>
+				<div class="col-6">
+					<button id="invalidButt" class="btn btn-danger btn-block">Invalider</button>
+				</div>
+			</div>
 		</template>
 		
 		
