@@ -1,17 +1,14 @@
 /**
-*	Implemente la méthode de Hash à l'objet String
+*	Fonction de hash Sha-256
 **/
-Object.defineProperty(String.prototype, 'hashCode', {
-  value: function() {
-    var hash = 0, i, chr;
-    for (i = 0; i < this.length; i++) {
-      chr   = this.charCodeAt(i);
-      hash  = ((hash << 5) - hash) + chr;
-      hash |= 0;
-    }
-    return hash;
-  }
-});
+function hashThis(phrase){
+	var enc = new TextEncoder();
+	var buffer = enc.encode(phrase);
+	var hashed = crypto.subtle.digest("SHA-256",buffer);
+	return hashed;
+};
+
+
 
 let blockchain = new BlockChain();
 let lastHash = "";
@@ -100,10 +97,12 @@ function BlockChain(){
 function Block(chaine){
 	this.chaine = chaine;
 	
-	var newHash = chaine.hashCode();
-	this.hash = newHash;
-	this.hashParent = lastHash;
-	lastHash = newHash;
+	var promise = hashThis(chaine);
+	promise.then((hash) => {
+		this.hash = hash;
+		this.hashParent = lastHash;
+		lastHash = hash;
+	});
 	
 	this.transactions = [];
 	this.valideCount = 0;
@@ -127,8 +126,8 @@ function Block(chaine){
 		var seeBlockModalTemplateClone = document.importNode(seeBlockModalTemplate.content,true);
 		
 		seeBlockModalTemplateClone.getElementById("chaine").innerHTML = this.chaine;
-		seeBlockModalTemplateClone.getElementById("hash").innerHTML = this.hash;
-		seeBlockModalTemplateClone.getElementById("hashParent").innerHTML = this.hashParent;
+		seeBlockModalTemplateClone.getElementById("hash").innerHTML = arrayBufferToString(this.hash);
+		seeBlockModalTemplateClone.getElementById("hashParent").innerHTML = arrayBufferToString(this.hashParent);
 		seeBlockModalTemplateClone.getElementById("valide").innerHTML = this.valideCount;
 		seeBlockModalTemplateClone.getElementById("invalide").innerHTML = this.nonValideCount;
 		
@@ -175,3 +174,11 @@ function Transaction(){
 		return this.valideCount > this.nonValideCount;
 	};
 }
+
+function arrayBufferToString(ab){
+	if(ab !=""){
+		var enc = new TextDecoder("utf-8");
+		return enc.decode(ab);
+	}
+	return "";
+};
